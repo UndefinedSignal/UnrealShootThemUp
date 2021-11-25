@@ -7,28 +7,32 @@
 #include "STURifleWeapon.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class SHOOTTHEMUP_API ASTURifleWeapon : public ASTUBaseWeapon
 {
 	GENERATED_BODY()
-	
-public:
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Damage");
+  public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage");
 	float TimerBetweenShots = 0.1f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Damage");
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage");
 	float BulletSpread = 1.5f;
 
 	virtual void StartFire() override;
 	virtual void StopFire() override;
 
-protected:
+  protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage");
+	float DamageAmount = 10.0f;
+
 	virtual void MakeShot() override;
 	virtual bool GetTraceData(FVector &TraceStart, FVector &TraceEnd) const override;
 
-private:
+  private:
 	FTimerHandle ShotTimerHandle;
+
+	void DealDamage(FHitResult &HitResult);
 };

@@ -1,10 +1,8 @@
 // Shoot Them Up Game. TestUnit. All RIghts Recieved
 
-
 #include "Weapon/STURifleWeapon.h"
-#include "Engine/World.h"
 #include "DrawDebugHelpers.h"
-
+#include "Engine/World.h"
 
 void ASTURifleWeapon::StartFire()
 {
@@ -57,4 +55,12 @@ bool ASTURifleWeapon::GetTraceData(FVector &TraceStart, FVector &TraceEnd) const
 	const FVector ShootDirection = FMath::VRandCone(ViewRotation.Vector(), HalfRad);
 	TraceEnd = TraceStart + ShootDirection * TraceMaxDistance;
 	return true;
+}
+
+void ASTURifleWeapon::DealDamage(FHitResult &HitResult)
+{
+	auto const DamagedActor = HitResult.GetActor();
+	if (!DamagedActor)
+		return;
+	HitResult.Actor->TakeDamage(DamageAmount, FDamageEvent{}, GetPlayerController(), this);
 }

@@ -14,9 +14,6 @@ class SHOOTTHEMUP_API ASTUBaseWeapon : public AActor
 	GENERATED_BODY()
 	
 public:	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Damage");
-	float DamageAmount = 10.0f;
-
 	// Sets default values for this actor's properties
 	ASTUBaseWeapon();
 
@@ -27,10 +24,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	USkeletalMeshComponent* WeaponMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components");
 	FName MuzzleSocketName = "MuzzleSocket";
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components");
 	float TraceMaxDistance = 1500.0f;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,15 +37,8 @@ protected:
 
 	APlayerController *GetPlayerController() const;
 	FVector GetMuzzleWorldLocation() const;
-	
-
 
 	void MakeHit(FHitResult &HitResult, const FVector &TraceStart, const FVector &TraceEnd);
 
 	bool GetPlayerViewPoint(FVector &ViewLocation, FRotator &ViewRotation) const;
-	
-	void DealDamage(FHitResult &HitResult);
-
-
-
 };
