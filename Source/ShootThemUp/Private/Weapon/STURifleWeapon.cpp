@@ -8,8 +8,8 @@ DEFINE_LOG_CATEGORY_STATIC(LogRifleWeapon, All, All);
 
 void ASTURifleWeapon::StartFire()
 {
-	MakeShot();
 	GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &ASTURifleWeapon::MakeShot, TimerBetweenShots, true);
+	MakeShot();
 }
 
 void ASTURifleWeapon::StopFire()
