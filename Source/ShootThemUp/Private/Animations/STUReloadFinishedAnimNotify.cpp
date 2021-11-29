@@ -1,6 +1,5 @@
 // Shoot Them Up Game. TestUnit. All RIghts Recieved
 
 
-#include "Animations/STUEquipFinishedAimNotify.h"
-
+#include "Animations/STUReloadFinishedAnimNotify.h"
 
