@@ -28,6 +28,16 @@ public:
 	void ChangeClip();
 	bool CanReload() const;
 
+	FAmmoData GetAmmoData() const
+	{
+		return CurrentAmmo;
+	}
+
+	FWeaponUIData GetUIData() const
+	{
+		return UIData;
+	}
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
 	USkeletalMeshComponent* WeaponMesh;
@@ -40,6 +50,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon");
 	FAmmoData DefaultAmmo{15, 10, false};
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI");
+	FWeaponUIData UIData;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

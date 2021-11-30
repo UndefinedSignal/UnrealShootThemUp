@@ -22,6 +22,18 @@ struct FAmmoData
 };
 
 USTRUCT(BlueprintType)
+struct FWeaponUIData
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI");
+	UTexture2D* MainIcon;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI");
+	UTexture2D* CrosshairIcon;
+};
+
+USTRUCT(BlueprintType)
 struct FWeaponData
 {
 	GENERATED_USTRUCT_BODY()
@@ -36,3 +48,4 @@ struct FWeaponData
 // Health
 DECLARE_MULTICAST_DELEGATE(FOnDeath);
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float);
+
