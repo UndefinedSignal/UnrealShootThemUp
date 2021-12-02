@@ -87,3 +87,23 @@ void USTUHealthComponent::SetHealth(float NewHealth)
 	Health = FMath::Clamp(NewHealth, 0.0f, MaxHealth);
 	OnHealthChanged.Broadcast(Health);
 }
+
+bool USTUHealthComponent::IsHealthFull() const
+{
+	if (Health == MaxHealth)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool USTUHealthComponent::TryToHeal(float HealthAmount)
+{
+	if (IsHealthFull())
+	{
+		return false;
+	}
+	SetHealth(Health + HealthAmount);
+	OnHealthChanged.Broadcast(Health);
+	return true;
+}
