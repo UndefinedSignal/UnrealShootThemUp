@@ -99,7 +99,7 @@ private:
 	void OnStartRunning();
 	void OnStoptRunning();
 	void OnDeath();
-	void OnHealthChanged(float Health);
+	void OnHealthChanged(float Health, float HealthDelta);
 
 	UFUNCTION()
 	void OnGroundLaned(const FHitResult& HitResult);

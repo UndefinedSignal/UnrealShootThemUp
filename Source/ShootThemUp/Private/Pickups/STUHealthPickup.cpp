@@ -1,7 +1,7 @@
 // Shoot Them Up Game. TestUnit. All RIghts Recieved
 
-#include "Components/STUHealthComponent.h"
 #include "Pickups/STUHealthPickup.h"
+#include "Components/STUHealthComponent.h"
 #include "STUUtils.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogHealthPickup, All, All);
