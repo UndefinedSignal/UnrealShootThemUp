@@ -2,10 +2,12 @@
 
 #include "Weapon/STUBaseWeapon.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "Engine/World.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogBaseWeapon, All, All);
 
@@ -29,17 +31,14 @@ void ASTUBaseWeapon::BeginPlay()
 
 void ASTUBaseWeapon::StartFire()
 {
-
 }
 
 void ASTUBaseWeapon::StopFire()
 {
-
 }
 
 void ASTUBaseWeapon::MakeShot()
 {
-
 }
 
 APlayerController *ASTUBaseWeapon::GetPlayerController() const
@@ -54,7 +53,8 @@ APlayerController *ASTUBaseWeapon::GetPlayerController() const
 bool ASTUBaseWeapon::GetPlayerViewPoint(FVector &ViewLocation, FRotator &ViewRotation) const
 {
 	const auto Controller = GetPlayerController();
-	if (!Controller) return false;
+	if (!Controller)
+		return false;
 
 	Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
 	return true;
@@ -69,7 +69,8 @@ bool ASTUBaseWeapon::GetTraceData(FVector &TraceStart, FVector &TraceEnd) const
 {
 	FVector ViewLocation;
 	FRotator ViewRotation;
-	if(!GetPlayerViewPoint(ViewLocation, ViewRotation)) return false;
+	if (!GetPlayerViewPoint(ViewLocation, ViewRotation))
+		return false;
 
 	TraceStart = ViewLocation;
 	const FVector ShootDirection = ViewRotation.Vector();
@@ -79,7 +80,8 @@ bool ASTUBaseWeapon::GetTraceData(FVector &TraceStart, FVector &TraceEnd) const
 
 void ASTUBaseWeapon::MakeHit(FHitResult &HitResult, const FVector &TraceStart, const FVector &TraceEnd)
 {
-	if (!GetWorld()) return;
+	if (!GetWorld())
+		return;
 
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.AddIgnoredActor(GetOwner());
@@ -97,7 +99,7 @@ void ASTUBaseWeapon::DecreaseAmmo()
 		return;
 	}
 	CurrentAmmo.Bullets--;
-	//LogAmmo();
+	// LogAmmo();
 
 	if (IsClipEmpty() && !IsAmmoEmpty())
 	{
@@ -141,7 +143,6 @@ void ASTUBaseWeapon::LogAmmo()
 	FString AmmoInfo = "Ammo: " + FString::FromInt(CurrentAmmo.Bullets) + " / ";
 	AmmoInfo += CurrentAmmo.Infinite ? "Infinite" : FString::FromInt(CurrentAmmo.Clips);
 	UE_LOG(LogBaseWeapon, Display, TEXT("%s"), *AmmoInfo);
-
 }
 
 bool ASTUBaseWeapon::IsAmmoFull() const
@@ -182,4 +183,14 @@ bool ASTUBaseWeapon::TryToAddAmmo(int32 ClipsAmount)
 		UE_LOG(LogBaseWeapon, Display, TEXT("Bullets were added."));
 	}
 	return true;
+}
+
+UNiagaraComponent *ASTUBaseWeapon::SpawnMuzzleFX()
+{
+	return UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFX,			   //
+														WeaponMesh,			   //
+														MuzzleSocketName,	   //
+														FVector::ZeroVector,   //
+														FRotator::ZeroRotator, //
+														EAttachLocation::SnapToTarget, true);
 }
