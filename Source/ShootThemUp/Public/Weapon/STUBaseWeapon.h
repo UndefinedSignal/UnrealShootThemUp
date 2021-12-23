@@ -39,6 +39,7 @@ public:
 	}
 
 	bool TryToAddAmmo(int32 ClipsAmount);
+	bool IsAmmoEmpty() const;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components");
@@ -73,7 +74,7 @@ protected:
 	bool GetPlayerViewPoint(FVector &ViewLocation, FRotator &ViewRotation) const;
 
 	void DecreaseAmmo();
-	bool IsAmmoEmpty() const;
+	
 	bool IsClipEmpty() const;
 	bool IsAmmoFull() const;
 

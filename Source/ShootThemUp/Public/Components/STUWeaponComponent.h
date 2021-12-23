@@ -17,9 +17,9 @@ class SHOOTTHEMUP_API USTUWeaponComponent : public UActorComponent
 public:	
 	USTUWeaponComponent();
 
-	void StartFire();
-	void StopFire();
-	void NextWeapon();
+	virtual void StartFire();
+	virtual void StopFire();
+	virtual void NextWeapon();
 	void Reload();
 
 	bool GetCurrentWeaponUIData(FWeaponUIData &UIData) const;
@@ -28,6 +28,8 @@ public:
 	bool TryToAddAmmo(TSubclassOf<ASTUBaseWeapon> Weapon, int32 ClipsAmount);
 
 protected:
+	int32 CurrentWeaponIndex = 0;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon");
 	TArray<FWeaponData> WeaponData;
 
@@ -40,27 +42,28 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon");
 	UAnimMontage *EquipAnimMontage;
 
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
-
-private:
 	UPROPERTY()
-	ASTUBaseWeapon* CurrentWeapon = nullptr;
+	ASTUBaseWeapon *CurrentWeapon = nullptr;
 
 	UPROPERTY()
 	TArray<ASTUBaseWeapon *> Weapons;
-	
+
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	bool CanFire() const;
+	bool CanEquip() const;
+	void EquipWeapon(int32 WeaponIndex);
+
+private:
 	UPROPERTY()
 	UAnimMontage *CurrentReloadAnimMontage = nullptr;
 
-	int32 CurrentWeaponIndex = 0;
 	bool EquipAnimInProgress = false;
 	bool ReloadInProgress = false;
 
 	void SpawnWeapons();
 	void AttachWeaponToSocket(ASTUBaseWeapon *Weapon, USceneComponent *SceneComponent, const FName &SocketName);
-	void EquipWeapon(int32 WeaponIndex);
 
 	void PlayAnimMontage(UAnimMontage *Animation);
 	void InitAnimations();
@@ -68,8 +71,6 @@ private:
 	void OnEquipFinished(USkeletalMeshComponent* MeshComponent);
 	void OnReloadFinished(USkeletalMeshComponent *MeshComponent);
 
-	bool CanFire() const;
-	bool CanEquip() const;
 	bool CanReload() const;
 
 	void OnEmptyClip(ASTUBaseWeapon* AmmoEmptyWeapon);
