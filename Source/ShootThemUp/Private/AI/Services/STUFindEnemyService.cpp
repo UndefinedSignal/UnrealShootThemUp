@@ -1,7 +1,7 @@
 // Shoot Them Up Game. TestUnit. All RIghts Recieved
 
-#include "Components/STUAIPerceptionComponent.h"
 #include "AI/Services/STUFindEnemyService.h"
+#include "Components/STUAIPerceptionComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "AIController.h"
 #include "STUUtils.h"

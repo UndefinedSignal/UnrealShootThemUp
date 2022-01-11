@@ -30,10 +30,11 @@ class SHOOTTHEMUP_API ASTUBasePickup : public AActor
   public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	bool CouldBeTaken() const;
 
   private:
 	float RotationYaw = 0.0f;
-
+	FTimerHandle RespawnTimerHandle;
 	virtual bool GivePickupTo(APawn* Player);
 
 	void PickupWasTaken();
