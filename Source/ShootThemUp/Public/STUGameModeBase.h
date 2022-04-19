@@ -69,4 +69,6 @@ class SHOOTTHEMUP_API ASTUGameModeBase : public AGameModeBase
 	void LogPlayerInfo();
 
 	void StartRespawn(AController* Controller);
+
+	void GameOver();
 };
