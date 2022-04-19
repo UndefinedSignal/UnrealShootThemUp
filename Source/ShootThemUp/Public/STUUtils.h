@@ -24,6 +24,6 @@ class STUUtils
 		const auto PlayerState1 = Cast<ASTUPlayerState>(Controller1->PlayerState);
 		const auto PlayerState2 = Cast<ASTUPlayerState>(Controller2->PlayerState);
 
-		return PlayerState1 && PlayerState2 && PlayerState1->GetTeamID() != PlayerState2->GetTeamID();
+		return PlayerState1 && PlayerState2 && PlayerState1->GetTeamID() == PlayerState2->GetTeamID();
 	}
 };

@@ -139,6 +139,7 @@ FLinearColor ASTUGameModeBase::DetermineColorByTeamID(int32 TeamID) const
 		   *GameData.DefaulTeamColor.ToString());
 	return GameData.DefaulTeamColor;
 }
+
 void ASTUGameModeBase::SetPlayerColor(AController *Controller)
 {
 	if (!Controller)

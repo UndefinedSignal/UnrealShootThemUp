@@ -32,7 +32,7 @@ AActor *USTUAIPerceptionComponent::GetClosestEnemy() const
 		const auto PercievePawn = Cast<APawn>(PercieveActor);
 		const auto AreEnemies = PercievePawn && STUUtils::AreEnemies(Controller, PercievePawn->Controller);
 
-		if (HealtComponent && !HealtComponent->IsDead() && AreEnemies)
+		if (HealtComponent && !HealtComponent->IsDead() && !AreEnemies)
 		{
 			const auto CurrentDistance = (PercieveActor->GetActorLocation() - Pawn->GetActorLocation()).Size();
 			if (CurrentDistance < BestDistance)
