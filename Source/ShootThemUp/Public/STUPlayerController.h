@@ -10,7 +10,7 @@
  *
  */
 
-class ASTURespawnComponent;
+class USTURespawnComponent;
 
 UCLASS()
 class SHOOTTHEMUP_API ASTUPlayerController : public APlayerController
@@ -20,5 +20,5 @@ class SHOOTTHEMUP_API ASTUPlayerController : public APlayerController
 	ASTUPlayerController();
   protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AI");
-	ASTURespawnComponent *RespawnComponent;
+	USTURespawnComponent *RespawnComponent;
 };

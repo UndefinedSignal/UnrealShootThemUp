@@ -12,7 +12,7 @@ ASTUAIController::ASTUAIController()
 	STUAIPerceptionComponent = CreateAbstractDefaultSubobject<USTUAIPerceptionComponent>("STUPerceptionComponent");
 	SetPerceptionComponent(*STUAIPerceptionComponent);
 
-	RespawnComponent = CreateAbstractDefaultSubobject<ASTURespawnComponent>("ASTURespawnComponent");
+	RespawnComponent = CreateAbstractDefaultSubobject<USTURespawnComponent>("USTURespawnComponent");
 
 	bWantsPlayerState = true;
 

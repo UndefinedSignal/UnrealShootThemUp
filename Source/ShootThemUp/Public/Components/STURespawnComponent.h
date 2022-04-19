@@ -7,14 +7,19 @@
 #include "STURespawnComponent.generated.h"
 
 UCLASS()
-class SHOOTTHEMUP_API ASTURespawnComponent : public AActor
+class SHOOTTHEMUP_API USTURespawnComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
   public:
-	ASTURespawnComponent();
+	USTURespawnComponent();
 
 	void Respawn(int32 RespawnTime);
+	int32 GetRespawnCountDown() const
+	{
+		return RespawnCountDown;
+	}
+	bool IsRespawnInProgress() const;
 
   private:
 	FTimerHandle RespawnTimerHandle;

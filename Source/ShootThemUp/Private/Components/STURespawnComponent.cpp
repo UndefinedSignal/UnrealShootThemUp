@@ -5,28 +5,28 @@
 #include "STUGameModeBase.h"
 
 // Sets default values
-ASTURespawnComponent::ASTURespawnComponent()
+USTURespawnComponent::USTURespawnComponent()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = false;
 
 
 }
 
-void ASTURespawnComponent::Respawn(int32 RespawnTime)
+void USTURespawnComponent::Respawn(int32 RespawnTime)
 {
 	if (!GetWorld())
 		return;
 
 	RespawnCountDown = RespawnTime;
-	GetWorld()->GetTimerManager().SetTimer(RespawnTimerHandle, this, &ASTURespawnComponent::RespawnTimerUpdate, 1.0f,
+	GetWorld()->GetTimerManager().SetTimer(RespawnTimerHandle, this, &USTURespawnComponent::RespawnTimerUpdate, 1.0f,
 										   true);
 
 }
 
-void ASTURespawnComponent::RespawnTimerUpdate()
+void USTURespawnComponent::RespawnTimerUpdate()
 {
-	if (--RespawnCountDown == 0)
+	if (--RespawnCountDown <= 0)
 	{
 		if (!GetWorld())
 			return;
@@ -37,4 +37,9 @@ void ASTURespawnComponent::RespawnTimerUpdate()
 			return;
 		GameMode->RespawnRequest(Cast<AController>(GetOwner()));
 	}
+}
+
+bool USTURespawnComponent::IsRespawnInProgress() const
+{
+	return GetWorld() && GetWorld()->GetTimerManager().IsTimerActive(RespawnTimerHandle);
 }

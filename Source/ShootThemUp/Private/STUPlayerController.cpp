@@ -5,5 +5,5 @@
 
 ASTUPlayerController::ASTUPlayerController()
 {
-	RespawnComponent = CreateAbstractDefaultSubobject<ASTURespawnComponent>("ASTURespawnComponent");
+	RespawnComponent = CreateAbstractDefaultSubobject<USTURespawnComponent>("USTURespawnComponent");
 }
