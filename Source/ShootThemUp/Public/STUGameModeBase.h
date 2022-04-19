@@ -26,6 +26,8 @@ class SHOOTTHEMUP_API ASTUGameModeBase : public AGameModeBase
 
 	void Killed(AController* KillerController, AController* VictimController);
 
+	void RespawnRequest(AController* Controller);
+
 	FGameData GetGameData() const
 	{
 		return GameData;
@@ -65,4 +67,6 @@ class SHOOTTHEMUP_API ASTUGameModeBase : public AGameModeBase
 	void SetPlayerColor(AController *Controller);
 	
 	void LogPlayerInfo();
+
+	void StartRespawn(AController* Controller);
 };
