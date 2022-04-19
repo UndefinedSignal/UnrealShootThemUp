@@ -4,7 +4,7 @@
 // Weapon
 class ASTUBaseWeapon;
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnClipEmptySignature, ASTUBaseWeapon*);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnClipEmptySignature, ASTUBaseWeapon *);
 
 USTRUCT(BlueprintType)
 struct FAmmoData
@@ -27,10 +27,10 @@ struct FWeaponUIData
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI");
-	UTexture2D* MainIcon;
+	UTexture2D *MainIcon;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI");
-	UTexture2D* CrosshairIcon;
+	UTexture2D *CrosshairIcon;
 };
 
 USTRUCT(BlueprintType)
@@ -48,7 +48,6 @@ struct FWeaponData
 // Health
 DECLARE_MULTICAST_DELEGATE(FOnDeath);
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnHealthChangedSignature, float, float);
-
 
 // VFX
 
@@ -70,7 +69,6 @@ struct FDecalData
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX");
 	float FadeOutTime = 0.7f;
-
 };
 
 USTRUCT(BlueprintType)
@@ -83,4 +81,25 @@ struct FImpactData
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX");
 	FDecalData DecalData;
+};
+
+USTRUCT(BlueprintType)
+struct FGameData
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game", meta = (ClampMin = "1", ClampMax = "100"));
+	int32 PlayersNum = 2;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game", meta = (ClampMin = "1", ClampMax = "10"));
+	int32 RoundsNum = 4;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game", meta = (ClampMin = "3", ClampMax = "300"));
+	int32 RoundTime = 10; // In seconds
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game");
+	FLinearColor DefaulTeamColor = FLinearColor::Red;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game");
+	TArray<FLinearColor> TeamColors;
 };

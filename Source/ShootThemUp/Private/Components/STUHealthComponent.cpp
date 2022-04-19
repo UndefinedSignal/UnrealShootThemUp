@@ -7,6 +7,8 @@
 #include "GameFramework/Controller.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
+#include "STUUtils.h"
+#include "STUGameModeBase.h"
 
 //#include "Dev/STUFireDamageType.h"
 //#include "Dev/STUIceDamageType.h"
@@ -45,12 +47,13 @@ void USTUHealthComponent::OnTakeAnyDamage(AActor *DamagedActor, float Damage, co
 	{
 		return;
 	}
-	
+
 	SetHealth(Health - Damage);
 	GetWorld()->GetTimerManager().ClearTimer(HealTimerHandle);
 
 	if (IsDead())
 	{
+		Killed(InstigatedBy);
 		OnDeath.Broadcast();
 	}
 	else if (AutoHeal )
@@ -131,4 +134,18 @@ void USTUHealthComponent::PlayCameraShake()
 		return;
 	}
 	Controller->PlayerCameraManager->StartCameraShake(CameraShake);
+}
+
+void USTUHealthComponent::Killed(AController *KillerController)
+{
+	if (!GetWorld())
+		return;
+	const auto GameMode = Cast<ASTUGameModeBase>(GetWorld()->GetAuthGameMode());
+	if (!GameMode)
+		return;
+
+	const auto Player = Cast<APawn>(GetOwner());
+	const auto VictimController = Player ? Player->Controller : nullptr;
+
+	GameMode->Killed(KillerController, VictimController);
 }

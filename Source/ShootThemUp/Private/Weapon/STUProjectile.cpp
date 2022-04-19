@@ -62,7 +62,7 @@ void ASTUProjectile::OnProjectileHit(UPrimitiveComponent *HitComponent, AActor *
 	Destroy();
 }
 
-AController *ASTUProjectile::GetController()
+AController *ASTUProjectile::GetController() const
 {
 	const auto Pawn = Cast<APawn>(GetOwner());
 	return Pawn ? Pawn->GetController() : nullptr;
