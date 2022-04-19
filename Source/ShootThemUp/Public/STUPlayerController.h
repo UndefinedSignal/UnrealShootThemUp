@@ -21,4 +21,8 @@ class SHOOTTHEMUP_API ASTUPlayerController : public APlayerController
   protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AI");
 	USTURespawnComponent *RespawnComponent;
+
+	virtual void OnPossess(APawn *InPawn) override;
 };
+
+
