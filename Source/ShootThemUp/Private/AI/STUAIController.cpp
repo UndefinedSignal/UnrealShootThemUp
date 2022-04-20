@@ -15,8 +15,6 @@ ASTUAIController::ASTUAIController()
 	RespawnComponent = CreateAbstractDefaultSubobject<USTURespawnComponent>("USTURespawnComponent");
 
 	bWantsPlayerState = true;
-
-	
 }
 
 void ASTUAIController::Tick(float DeltaTime)
